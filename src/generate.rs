@@ -25,6 +25,7 @@ fn generate_struct(input_h: &str, output_rs: &str) -> Result<(), String> {
                        .header(input_h)
                        .derive_debug(false)
                        .derive_default(true)
+                       .generate_comments(false)
                        .generate()
                        .map_err(|_| format!("failed to generate binding"))?;
 

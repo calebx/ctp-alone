@@ -7,13 +7,12 @@ use simple_error::SimpleError;
 use std::borrow::Cow;
 use std::fmt;
 use std::os::raw::c_int;
-use time::{ Timespec, Tm };
+// use time::{ Timespec, Tm };
 
 /// 交易接口中的查询操作的限制为:
-///   每秒钟最多只能进行一次查询操作。
-///   在途的查询操作最多只能有一个。
-/// 在途:查询操作从发送请求,到接收到响应为一个完整的过程。如果请求已经发送,但是未收到响应,则称
-/// 该查询操作在途。
+/// 1. 每秒钟最多只能进行一次查询操作。
+/// 2. 在途的查询操作最多只能有一个。
+/// 在途:查询操作从发送请求,到接收到响应为一个完整的过程。如果请求已经发送,但是未收到响应,则称该查询操作在途。
 /// 上述限制只针对交易接口中的数据查询操作(ReqQryXXX),对报单,撤单,报价,询价等操作没有影响。
 pub const DEFAULT_MAX_NUM_QUERY_REQUEST_PER_SECOND: usize = 1;
 
@@ -21,6 +20,7 @@ pub const DEFAULT_MAX_NUM_QUERY_REQUEST_PER_SECOND: usize = 1;
 /// 不进行配置的情况下,默认流量限制为:
 /// 在一个连接会话(Session)中,每个客户端每秒钟最多只能发送 6 笔交易相关的指令(报单,撤单等)。
 pub const DEFAULT_MAX_NUM_ORDER_REQUEST_PER_SECOND: usize = 6;
+
 /// 同一个账户同时最多只能建立 6 个会话(Session)。
 pub const DEFAULT_MAX_NUM_CONCURRENT_SESSION: usize = 6;
 
@@ -64,10 +64,10 @@ pub fn reduce_comb_flags(flags: &[u8]) -> String {
 }
 
 pub fn maybe_char(c: u8) -> Option<char> {
-    if c != 0u8 {
-        Some(char::from(c))
-    } else {
+    if c == 0u8 {
         None
+    } else {
+        Some(char::from(c))
     }
 }
 
@@ -86,17 +86,17 @@ pub struct OrderIdExchangeDuo {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum ResumeType {
-    Restart = THOST_TE_RESUME_TYPE::THOST_TERT_RESTART as isize,
-    Resume = THOST_TE_RESUME_TYPE::THOST_TERT_RESUME as isize,
-    Quick = THOST_TE_RESUME_TYPE::THOST_TERT_QUICK as isize,
+    Restart = THOST_TE_RESUME_TYPE_THOST_TERT_RESTART as isize,
+    Resume = THOST_TE_RESUME_TYPE_THOST_TERT_RESUME as isize,
+    Quick = THOST_TE_RESUME_TYPE_THOST_TERT_QUICK as isize,
 }
 
 impl std::convert::Into<THOST_TE_RESUME_TYPE> for ResumeType {
     fn into(self) -> THOST_TE_RESUME_TYPE {
         match self {
-            ResumeType::Restart => THOST_TE_RESUME_TYPE::THOST_TERT_RESTART,
-            ResumeType::Resume => THOST_TE_RESUME_TYPE::THOST_TERT_RESUME,
-            ResumeType::Quick => THOST_TE_RESUME_TYPE::THOST_TERT_QUICK,
+            ResumeType::Restart => THOST_TE_RESUME_TYPE_THOST_TERT_RESTART,
+            ResumeType::Resume => THOST_TE_RESUME_TYPE_THOST_TERT_RESUME,
+            ResumeType::Quick => THOST_TE_RESUME_TYPE_THOST_TERT_QUICK,
         }
     }
 }
@@ -225,101 +225,101 @@ pub fn is_valid_order_sys_id(order_sys_id: &TThostFtdcOrderSysIDType) -> bool {
     order_sys_id[0] != b'\0'
 }
 
-pub fn to_exchange_timestamp(trading_day: &TThostFtdcDateType,
-                              update_time: &TThostFtdcTimeType,
-                              update_millisec: &TThostFtdcMillisecType) -> Result<Timespec, SimpleError> {
-    let year = match ::std::str::from_utf8(&trading_day[0..4]) {
-        Ok(year_str) => {
-            match year_str.parse::<u16>() {
-                Ok(year) => year,
-                Err(err) => {
-                    return Err(SimpleError::new(format!("invalid year string, {}", err)));
-                },
-            }
-        },
-        Err(err) => {
-            return Err(SimpleError::new(format!("year not utf8, {}", err)));
-        },
-    };
-    let month = match ::std::str::from_utf8(&trading_day[4..6]) {
-        Ok(month_str) => {
-            match month_str.parse::<u8>() {
-                Ok(month) => month,
-                Err(err) => {
-                    return Err(SimpleError::new(format!("invalid month string, {}", err)));
-                },
-            }
-        },
-        Err(err) => {
-            return Err(SimpleError::new(format!("month not utf8, {}", err)));
-        },
-    };
-    let day = match ::std::str::from_utf8(&trading_day[6..8]) {
-        Ok(day_str) => {
-            match day_str.parse::<u8>() {
-                Ok(day) => day,
-                Err(err) => {
-                    return Err(SimpleError::new(format!("invalid day string, {}", err)));
-                },
-            }
-        },
-        Err(err) => {
-            return Err(SimpleError::new(format!("day not utf8, {}", err)));
-        },
-    };
-    let hour = match ::std::str::from_utf8(&update_time[0..2]) {
-        Ok(hour_str) => {
-            match hour_str.parse::<u8>() {
-                Ok(hour) => hour,
-                Err(err) => {
-                    return Err(SimpleError::new(format!("invalid hour string, {}", err)));
-                },
-            }
-        },
-        Err(err) => {
-            return Err(SimpleError::new(format!("hour not utf8, {}", err)));
-        },
-    };
-    let minute = match ::std::str::from_utf8(&update_time[3..5]) {
-        Ok(minute_str) => {
-            match minute_str.parse::<u8>() {
-                Ok(minute) => minute,
-                Err(err) => {
-                    return Err(SimpleError::new(format!("invalid minute string, {}", err)));
-                },
-            }
-        },
-        Err(err) => {
-            return Err(SimpleError::new(format!("minute not utf8, {}", err)));
-        },
-    };
-    let second = match ::std::str::from_utf8(&update_time[6..8]) {
-        Ok(second_str) => {
-            match second_str.parse::<u8>() {
-                Ok(second) => second,
-                Err(err) => {
-                    return Err(SimpleError::new(format!("invalid second string, {}", err)));
-                },
-            }
-        },
-        Err(err) => {
-            return Err(SimpleError::new(format!("second not utf8, {}", err)));
-        },
-    };
-    let nanosec = *update_millisec as i32 * 1000 * 1000;
-    let tm = Tm { tm_sec: second as i32,
-                  tm_min: minute as i32,
-                  tm_hour: hour as i32 - 8, // UTC+8
-                  tm_mday: day as i32,
-                  tm_mon: month as i32 - 1,
-                  tm_year: year as i32 - 1900,
-                  tm_wday: 0i32,
-                  tm_yday: 0i32,
-                  tm_isdst: 0i32,
-                  tm_utcoff: 0i32,
-                  tm_nsec: nanosec };
-    Ok(tm.to_timespec())
-}
+// pub fn to_exchange_timestamp(trading_day: &TThostFtdcDateType,
+//                               update_time: &TThostFtdcTimeType,
+//                               update_millisec: &TThostFtdcMillisecType) -> Result<Timespec, SimpleError> {
+//     let year = match ::std::str::from_utf8(&trading_day[0..4]) {
+//         Ok(year_str) => {
+//             match year_str.parse::<u16>() {
+//                 Ok(year) => year,
+//                 Err(err) => {
+//                     return Err(SimpleError::new(format!("invalid year string, {}", err)));
+//                 },
+//             }
+//         },
+//         Err(err) => {
+//             return Err(SimpleError::new(format!("year not utf8, {}", err)));
+//         },
+//     };
+//     let month = match ::std::str::from_utf8(&trading_day[4..6]) {
+//         Ok(month_str) => {
+//             match month_str.parse::<u8>() {
+//                 Ok(month) => month,
+//                 Err(err) => {
+//                     return Err(SimpleError::new(format!("invalid month string, {}", err)));
+//                 },
+//             }
+//         },
+//         Err(err) => {
+//             return Err(SimpleError::new(format!("month not utf8, {}", err)));
+//         },
+//     };
+//     let day = match ::std::str::from_utf8(&trading_day[6..8]) {
+//         Ok(day_str) => {
+//             match day_str.parse::<u8>() {
+//                 Ok(day) => day,
+//                 Err(err) => {
+//                     return Err(SimpleError::new(format!("invalid day string, {}", err)));
+//                 },
+//             }
+//         },
+//         Err(err) => {
+//             return Err(SimpleError::new(format!("day not utf8, {}", err)));
+//         },
+//     };
+//     let hour = match ::std::str::from_utf8(&update_time[0..2]) {
+//         Ok(hour_str) => {
+//             match hour_str.parse::<u8>() {
+//                 Ok(hour) => hour,
+//                 Err(err) => {
+//                     return Err(SimpleError::new(format!("invalid hour string, {}", err)));
+//                 },
+//             }
+//         },
+//         Err(err) => {
+//             return Err(SimpleError::new(format!("hour not utf8, {}", err)));
+//         },
+//     };
+//     let minute = match ::std::str::from_utf8(&update_time[3..5]) {
+//         Ok(minute_str) => {
+//             match minute_str.parse::<u8>() {
+//                 Ok(minute) => minute,
+//                 Err(err) => {
+//                     return Err(SimpleError::new(format!("invalid minute string, {}", err)));
+//                 },
+//             }
+//         },
+//         Err(err) => {
+//             return Err(SimpleError::new(format!("minute not utf8, {}", err)));
+//         },
+//     };
+//     let second = match ::std::str::from_utf8(&update_time[6..8]) {
+//         Ok(second_str) => {
+//             match second_str.parse::<u8>() {
+//                 Ok(second) => second,
+//                 Err(err) => {
+//                     return Err(SimpleError::new(format!("invalid second string, {}", err)));
+//                 },
+//             }
+//         },
+//         Err(err) => {
+//             return Err(SimpleError::new(format!("second not utf8, {}", err)));
+//         },
+//     };
+//     let nanosec = *update_millisec as i32 * 1000 * 1000;
+//     let tm = Tm { tm_sec: second as i32,
+//                   tm_min: minute as i32,
+//                   tm_hour: hour as i32 - 8, // UTC+8
+//                   tm_mday: day as i32,
+//                   tm_mon: month as i32 - 1,
+//                   tm_year: year as i32 - 1900,
+//                   tm_wday: 0i32,
+//                   tm_yday: 0i32,
+//                   tm_isdst: 0i32,
+//                   tm_utcoff: 0i32,
+//                   tm_nsec: nanosec };
+//     Ok(tm.to_timespec())
+// }
 
 pub fn set_cstr_from_str(buffer: &mut [u8], text: &str) -> Result<(), SimpleError> {
     if let Some(i) = memchr::memchr(0, text.as_bytes()) {
@@ -355,12 +355,11 @@ pub fn normalize_double(d: f64) -> Option<f64> {
 #[cfg(test)]
 mod tests {
     use std::borrow::Cow;
-    use time::Timespec;
     use super::ascii_cstr_to_str;
     use super::gb18030_cstr_to_str;
-    use super::to_exchange_timestamp;
+    // use super::to_exchange_timestamp;
     use super::{ set_cstr_from_str, set_cstr_from_str_truncate };
-    use super::CThostFtdcDepthMarketDataField;
+    // use super::CThostFtdcDepthMarketDataField;
 
     #[test]
     fn len_0_ascii_cstr_to_str() {
@@ -460,17 +459,17 @@ mod tests {
         assert_eq!(buffer.as_ref(), b"hello\0");
     }
 
-    #[test]
-    fn exchange_timestamp_conversion() {
-        let mut md: CThostFtdcDepthMarketDataField = Default::default();
-        md.TradingDay = *b"19700101\0";
-        md.UpdateTime = *b"08:00:00\0";
-        md.UpdateMillisec = 0;
-        let ts1 = to_exchange_timestamp(&md.TradingDay, &md.UpdateTime, &md.UpdateMillisec);
-        assert_eq!(Ok(Timespec{ sec: 0, nsec: 0 }), ts1);
-        md.TradingDay = *b"19700102\0";
-        md.UpdateTime = *b"00:00:00\0";
-        let ts2 = to_exchange_timestamp(&md.TradingDay, &md.UpdateTime, &md.UpdateMillisec);
-        assert_eq!(Ok(Timespec{ sec: 57600, nsec: 0 }), ts2);
-    }
+    // #[test]
+    // fn exchange_timestamp_conversion() {
+    //     let mut md: CThostFtdcDepthMarketDataField = Default::default();
+    //     md.TradingDay = *b"19700101\0";
+    //     md.UpdateTime = *b"08:00:00\0";
+    //     md.UpdateMillisec = 0;
+    //     let ts1 = to_exchange_timestamp(&md.TradingDay, &md.UpdateTime, &md.UpdateMillisec);
+    //     assert_eq!(Ok(Timespec{ sec: 0, nsec: 0 }), ts1);
+    //     md.TradingDay = *b"19700102\0";
+    //     md.UpdateTime = *b"00:00:00\0";
+    //     let ts2 = to_exchange_timestamp(&md.TradingDay, &md.UpdateTime, &md.UpdateMillisec);
+    //     assert_eq!(Ok(Timespec{ sec: 57600, nsec: 0 }), ts2);
+    // }
 }

@@ -1,5 +1,5 @@
 [package]
-name = "ctp_alone"
+name = "ctp-alone"
 version = "0.1.0"
 authors = ["caleb.xiang <caleb.xiang@sinobot.com.cn>"]
 edition = "2018"

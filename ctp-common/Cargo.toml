@@ -1,10 +1,8 @@
 [package]
-name = "ctp-alone"
-version = "0.1.0"
-authors = ["caleb.xiang <caleb.xiang@sinobot.com.cn>"]
+name = "ctp-common"
+version = "0.8.0"
+authors = ["caleb.xiang <caleb.xiang@gmail.com>"]
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 encoding = "0.2"

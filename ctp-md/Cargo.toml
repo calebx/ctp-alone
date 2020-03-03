@@ -1,14 +1,9 @@
 [package]
-name = "ctp_md"
+name = "ctp-md"
 version = "0.8.0"
-authors = ["caleb.xiang <caleb.xiang@sinobot.com.cn>"]
+authors = ["caleb.xiang <caleb.xiang@gmail.com>"]
 edition = "2018"
-links = "ctp_md"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-
+links = "ctp-md"
 
 [features]
 channel = ["crossbeam-channel"]

@@ -111,11 +111,11 @@ fn generate_error(input_xml: &Path, output_rs: &Path) -> Result<(), String> {
 fn main() {
     let out_dir = "./src/generated";
 
-    let struct_header = "./api/ThostFtdcUserApiStruct.h";
+    let struct_header = "../ctp_api/ThostFtdcUserApiStruct.h";
     let struct_out_path = format!("{}/struct.rs.in", out_dir);
     generate_struct(struct_header, &struct_out_path).unwrap();
 
-    let error_xml = "./api/error.xml";
+    let error_xml = "../ctp_api/error.xml";
     let error_out_path = format!("{}/error.rs.in", out_dir);
     generate_error(Path::new(error_xml), Path::new(&error_out_path)).unwrap();
 }

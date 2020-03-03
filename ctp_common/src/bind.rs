@@ -3,8 +3,8 @@
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
 
-include!("generated/struct.rs.in");
-include!("generated/error.rs.in");
+include!("./generated/struct.rs");
+include!("./generated/error.rs");
 
 pub const THOST_FTDC_BOOL_TRUE: TThostFtdcBoolType = 1;
 pub const THOST_FTDC_BOOL_FALSE: TThostFtdcBoolType = 0;

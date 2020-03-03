@@ -112,10 +112,10 @@ fn main() {
     let out_dir = "./src/generated";
 
     let struct_header = "../ctp_api/ThostFtdcUserApiStruct.h";
-    let struct_out_path = format!("{}/struct.rs.in", out_dir);
+    let struct_out_path = format!("{}/struct.rs", out_dir);
     generate_struct(struct_header, &struct_out_path).unwrap();
 
     let error_xml = "../ctp_api/error.xml";
-    let error_out_path = format!("{}/error.rs.in", out_dir);
+    let error_out_path = format!("{}/error.rs", out_dir);
     generate_error(Path::new(error_xml), Path::new(&error_out_path)).unwrap();
 }

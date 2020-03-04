@@ -24,6 +24,11 @@ pub const DEFAULT_MAX_NUM_ORDER_REQUEST_PER_SECOND: usize = 6;
 /// 同一个账户同时最多只能建立 6 个会话(Session)。
 pub const DEFAULT_MAX_NUM_CONCURRENT_SESSION: usize = 6;
 
+pub fn sleep(s: u64) {
+    let sec = std::time::Duration::from_secs(s);
+    std::thread::sleep(sec);
+}
+
 pub fn ascii_cstr_to_str(s: &[u8]) -> Result<&str, SimpleError> {
     match s.last() {
         Some(&0u8) => {

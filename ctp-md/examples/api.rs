@@ -9,7 +9,7 @@ fn main() {
     let flow_path = ::std::ffi::CString::new("").unwrap();
     let mut md_api = MdApi::new(flow_path, false, false);
     md_api.register_spi(Box::new(Spi));
-    md_api.register_front(std::ffi::CString::new("tcp://180.168.146.187:10031").unwrap());
+    md_api.register_front(std::ffi::CString::new("tcp://180.168.146.187:10110").unwrap());
     md_api.init();
     
     sleep(1);

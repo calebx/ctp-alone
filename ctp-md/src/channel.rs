@@ -1,7 +1,5 @@
 use crossbeam_channel as channel;
-
 use std::time::SystemTime;
-
 use super::*;
 
 #[derive(Clone, Debug)]

@@ -484,7 +484,7 @@ struct SpiVTable {
     on_rtn_for_quote_rsp: extern "C" fn(spi: *mut CThostFtdcMdSpi, pForQuoteRsp: *const CThostFtdcForQuoteRspField ),
 }
 
-static SPI_VTABLE: SpiVTable = SpiVTable{
+static SPI_VTABLE: SpiVTable = SpiVTable {
     on_front_connected: spi_on_front_connected,
     on_front_disconnected: spi_on_front_disconnected,
     on_heart_beat_warning: spi_on_heart_beat_warning,

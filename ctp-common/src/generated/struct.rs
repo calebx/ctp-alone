@@ -21,6 +21,8 @@ pub const THOST_FTDC_ICT_LocalID: u8 = 71u8;
 pub const THOST_FTDC_ICT_BusinessRegistration: u8 = 72u8;
 pub const THOST_FTDC_ICT_HKMCIDCard: u8 = 73u8;
 pub const THOST_FTDC_ICT_AccountsPermits: u8 = 74u8;
+pub const THOST_FTDC_ICT_FrgPrmtRdCard: u8 = 75u8;
+pub const THOST_FTDC_ICT_CptMngPrdLetter: u8 = 76u8;
 pub const THOST_FTDC_ICT_OtherCard: u8 = 120u8;
 pub const THOST_FTDC_IR_All: u8 = 49u8;
 pub const THOST_FTDC_IR_Group: u8 = 50u8;
@@ -164,6 +166,8 @@ pub const THOST_FTDC_HF_Speculation: u8 = 49u8;
 pub const THOST_FTDC_HF_Arbitrage: u8 = 50u8;
 pub const THOST_FTDC_HF_Hedge: u8 = 51u8;
 pub const THOST_FTDC_HF_MarketMaker: u8 = 53u8;
+pub const THOST_FTDC_HF_SpecHedge: u8 = 54u8;
+pub const THOST_FTDC_HF_HedgeSpec: u8 = 55u8;
 pub const THOST_FTDC_BHF_Speculation: u8 = 49u8;
 pub const THOST_FTDC_BHF_Arbitrage: u8 = 50u8;
 pub const THOST_FTDC_BHF_Hedge: u8 = 51u8;
@@ -208,6 +212,8 @@ pub const THOST_FTDC_ORDT_DeriveFromCombination: u8 = 50u8;
 pub const THOST_FTDC_ORDT_Combination: u8 = 51u8;
 pub const THOST_FTDC_ORDT_ConditionalOrder: u8 = 52u8;
 pub const THOST_FTDC_ORDT_Swap: u8 = 53u8;
+pub const THOST_FTDC_ORDT_DeriveFromBlockTrade: u8 = 54u8;
+pub const THOST_FTDC_ORDT_DeriveFromEFPTrade: u8 = 55u8;
 pub const THOST_FTDC_TC_IOC: u8 = 49u8;
 pub const THOST_FTDC_TC_GFS: u8 = 50u8;
 pub const THOST_FTDC_TC_GFD: u8 = 51u8;
@@ -246,9 +252,11 @@ pub const THOST_FTDC_TRDT_OptionsExecution: u8 = 49u8;
 pub const THOST_FTDC_TRDT_OTC: u8 = 50u8;
 pub const THOST_FTDC_TRDT_EFPDerived: u8 = 51u8;
 pub const THOST_FTDC_TRDT_CombinationDerived: u8 = 52u8;
+pub const THOST_FTDC_TRDT_BlockTrade: u8 = 53u8;
 pub const THOST_FTDC_PSRC_LastPrice: u8 = 48u8;
 pub const THOST_FTDC_PSRC_Buy: u8 = 49u8;
 pub const THOST_FTDC_PSRC_Sell: u8 = 50u8;
+pub const THOST_FTDC_PSRC_OTC: u8 = 51u8;
 pub const THOST_FTDC_IS_BeforeTrading: u8 = 48u8;
 pub const THOST_FTDC_IS_NoTrading: u8 = 49u8;
 pub const THOST_FTDC_IS_Continous: u8 = 50u8;
@@ -993,6 +1001,7 @@ pub const THOST_FTDC_CDT_SpecFirst: u8 = 49u8;
 pub const THOST_FTDC_MFUR_None: u8 = 48u8;
 pub const THOST_FTDC_MFUR_Margin: u8 = 49u8;
 pub const THOST_FTDC_MFUR_All: u8 = 50u8;
+pub const THOST_FTDC_MFUR_CNY3: u8 = 51u8;
 pub const THOST_FTDC_SPT_CzceHedge: u8 = 49u8;
 pub const THOST_FTDC_SPT_IneForeignCurrency: u8 = 50u8;
 pub const THOST_FTDC_SPT_DceOpenClose: u8 = 51u8;
@@ -1125,6 +1134,17 @@ pub const THOST_FTDC_COMBT_STD: u8 = 51u8;
 pub const THOST_FTDC_COMBT_STG: u8 = 52u8;
 pub const THOST_FTDC_COMBT_PRT: u8 = 53u8;
 pub const THOST_FTDC_COMBT_CLD: u8 = 54u8;
+pub const THOST_FTDC_DCECOMBT_SPL: u8 = 48u8;
+pub const THOST_FTDC_DCECOMBT_OPL: u8 = 49u8;
+pub const THOST_FTDC_DCECOMBT_SP: u8 = 50u8;
+pub const THOST_FTDC_DCECOMBT_SPC: u8 = 51u8;
+pub const THOST_FTDC_DCECOMBT_BLS: u8 = 52u8;
+pub const THOST_FTDC_DCECOMBT_BES: u8 = 53u8;
+pub const THOST_FTDC_DCECOMBT_CAS: u8 = 54u8;
+pub const THOST_FTDC_DCECOMBT_STD: u8 = 55u8;
+pub const THOST_FTDC_DCECOMBT_STG: u8 = 56u8;
+pub const THOST_FTDC_DCECOMBT_BFO: u8 = 57u8;
+pub const THOST_FTDC_DCECOMBT_SFO: u8 = 97u8;
 pub const THOST_FTDC_ORPT_PreSettlementPrice: u8 = 49u8;
 pub const THOST_FTDC_ORPT_OpenPrice: u8 = 52u8;
 pub const THOST_FTDC_ORPT_MaxPreSettlementPrice: u8 = 53u8;
@@ -1182,8 +1202,19 @@ pub const THOST_FTDC_WPSR_Manual: u8 = 50u8;
 pub const THOST_FTDC_OSCF_CloseSelfOptionPosition: u8 = 49u8;
 pub const THOST_FTDC_OSCF_ReserveOptionPosition: u8 = 50u8;
 pub const THOST_FTDC_OSCF_SellCloseSelfFuturePosition: u8 = 51u8;
+pub const THOST_FTDC_OSCF_ReserveFuturePosition: u8 = 52u8;
 pub const THOST_FTDC_BZTP_Future: u8 = 49u8;
 pub const THOST_FTDC_BZTP_Stock: u8 = 50u8;
+pub const THOST_FTDC_APP_TYPE_Investor: u8 = 49u8;
+pub const THOST_FTDC_APP_TYPE_InvestorRelay: u8 = 50u8;
+pub const THOST_FTDC_APP_TYPE_OperatorRelay: u8 = 51u8;
+pub const THOST_FTDC_APP_TYPE_UnKnown: u8 = 52u8;
+pub const THOST_FTDC_RV_Right: u8 = 48u8;
+pub const THOST_FTDC_RV_Refuse: u8 = 49u8;
+pub const THOST_FTDC_OTC_TRDT_Block: u8 = 48u8;
+pub const THOST_FTDC_OTC_TRDT_EFP: u8 = 49u8;
+pub const THOST_FTDC_OTC_MT_DV01: u8 = 49u8;
+pub const THOST_FTDC_OTC_MT_ParValue: u8 = 50u8;
 pub const THOST_TE_RESUME_TYPE_THOST_TERT_RESTART: THOST_TE_RESUME_TYPE = 0;
 pub const THOST_TE_RESUME_TYPE_THOST_TERT_RESUME: THOST_TE_RESUME_TYPE = 1;
 pub const THOST_TE_RESUME_TYPE_THOST_TERT_QUICK: THOST_TE_RESUME_TYPE = 2;
@@ -1911,6 +1942,7 @@ pub type TThostFtdcExecResultType = ::std::os::raw::c_uchar;
 pub type TThostFtdcStrikeSequenceType = ::std::os::raw::c_int;
 pub type TThostFtdcStrikeTimeType = [::std::os::raw::c_uchar; 13usize];
 pub type TThostFtdcCombinationTypeType = ::std::os::raw::c_uchar;
+pub type TThostFtdcDceCombinationTypeType = ::std::os::raw::c_uchar;
 pub type TThostFtdcOptionRoyaltyPriceTypeType = ::std::os::raw::c_uchar;
 pub type TThostFtdcBalanceAlgorithmType = ::std::os::raw::c_uchar;
 pub type TThostFtdcActionTypeType = ::std::os::raw::c_uchar;
@@ -1941,6 +1973,31 @@ pub type TThostFtdcWeakPasswordSourceType = ::std::os::raw::c_uchar;
 pub type TThostFtdcRandomStringType = [::std::os::raw::c_uchar; 17usize];
 pub type TThostFtdcOptSelfCloseFlagType = ::std::os::raw::c_uchar;
 pub type TThostFtdcBizTypeType = ::std::os::raw::c_uchar;
+pub type TThostFtdcAppTypeType = ::std::os::raw::c_uchar;
+pub type TThostFtdcAppIDType = [::std::os::raw::c_uchar; 33usize];
+pub type TThostFtdcSystemInfoLenType = ::std::os::raw::c_int;
+pub type TThostFtdcAdditionalInfoLenType = ::std::os::raw::c_int;
+pub type TThostFtdcClientSystemInfoType = [::std::os::raw::c_uchar; 273usize];
+pub type TThostFtdcAdditionalInfoType = [::std::os::raw::c_uchar; 261usize];
+pub type TThostFtdcBase64ClientSystemInfoType = [::std::os::raw::c_uchar; 365usize];
+pub type TThostFtdcBase64AdditionalInfoType = [::std::os::raw::c_uchar; 349usize];
+pub type TThostFtdcCurrentAuthMethodType = ::std::os::raw::c_int;
+pub type TThostFtdcCaptchaInfoLenType = ::std::os::raw::c_int;
+pub type TThostFtdcCaptchaInfoType = [::std::os::raw::c_uchar; 2561usize];
+pub type TThostFtdcUserTextSeqType = ::std::os::raw::c_int;
+pub type TThostFtdcHandshakeDataType = [::std::os::raw::c_uchar; 301usize];
+pub type TThostFtdcHandshakeDataLenType = ::std::os::raw::c_int;
+pub type TThostFtdcCryptoKeyVersionType = [::std::os::raw::c_uchar; 31usize];
+pub type TThostFtdcRsaKeyVersionType = ::std::os::raw::c_int;
+pub type TThostFtdcSoftwareProviderIDType = [::std::os::raw::c_uchar; 22usize];
+pub type TThostFtdcCollectTimeType = [::std::os::raw::c_uchar; 21usize];
+pub type TThostFtdcQueryFreqType = ::std::os::raw::c_int;
+pub type TThostFtdcResponseValueType = ::std::os::raw::c_uchar;
+pub type TThostFtdcOTCTradeTypeType = ::std::os::raw::c_uchar;
+pub type TThostFtdcMatchTypeType = ::std::os::raw::c_uchar;
+pub type TThostFtdcOTCTraderIDType = [::std::os::raw::c_uchar; 31usize];
+pub type TThostFtdcRiskValueType = f64;
+pub type TThostFtdcIDBNameType = [::std::os::raw::c_uchar; 100usize];
 #[repr(C)]
 #[derive(Default, Copy, Clone)]
 pub struct CThostFtdcDisseminationField {
@@ -1999,17 +2056,18 @@ pub struct CThostFtdcReqUserLoginField {
     pub OneTimePassword: TThostFtdcPasswordType,
     pub ClientIPAddress: TThostFtdcIPAddressType,
     pub LoginRemark: TThostFtdcLoginRemarkType,
+    pub ClientIPPort: TThostFtdcIPPortType,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcReqUserLoginField() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcReqUserLoginField>(),
-        224usize,
+        228usize,
         concat!("Size of: ", stringify!(CThostFtdcReqUserLoginField))
     );
     assert_eq!(
         ::std::mem::align_of::<CThostFtdcReqUserLoginField>(),
-        1usize,
+        4usize,
         concat!("Alignment of ", stringify!(CThostFtdcReqUserLoginField))
     );
     assert_eq!(
@@ -2147,6 +2205,19 @@ fn bindgen_test_layout_CThostFtdcReqUserLoginField() {
             stringify!(CThostFtdcReqUserLoginField),
             "::",
             stringify!(LoginRemark)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginField>())).ClientIPPort as *const _
+                as usize
+        },
+        224usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginField),
+            "::",
+            stringify!(ClientIPPort)
         )
     );
 }
@@ -2433,18 +2504,19 @@ fn bindgen_test_layout_CThostFtdcForceUserLogoutField() {
     );
 }
 #[repr(C)]
-#[derive(Default, Copy, Clone)]
+#[derive(Copy, Clone)]
 pub struct CThostFtdcReqAuthenticateField {
     pub BrokerID: TThostFtdcBrokerIDType,
     pub UserID: TThostFtdcUserIDType,
     pub UserProductInfo: TThostFtdcProductInfoType,
     pub AuthCode: TThostFtdcAuthCodeType,
+    pub AppID: TThostFtdcAppIDType,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcReqAuthenticateField() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcReqAuthenticateField>(),
-        55usize,
+        88usize,
         concat!("Size of: ", stringify!(CThostFtdcReqAuthenticateField))
     );
     assert_eq!(
@@ -2501,19 +2573,38 @@ fn bindgen_test_layout_CThostFtdcReqAuthenticateField() {
             stringify!(AuthCode)
         )
     );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqAuthenticateField>())).AppID as *const _ as usize
+        },
+        55usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqAuthenticateField),
+            "::",
+            stringify!(AppID)
+        )
+    );
+}
+impl Default for CThostFtdcReqAuthenticateField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
 }
 #[repr(C)]
-#[derive(Default, Copy, Clone)]
+#[derive(Copy, Clone)]
 pub struct CThostFtdcRspAuthenticateField {
     pub BrokerID: TThostFtdcBrokerIDType,
     pub UserID: TThostFtdcUserIDType,
     pub UserProductInfo: TThostFtdcProductInfoType,
+    pub AppID: TThostFtdcAppIDType,
+    pub AppType: TThostFtdcAppTypeType,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcRspAuthenticateField() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcRspAuthenticateField>(),
-        38usize,
+        72usize,
         concat!("Size of: ", stringify!(CThostFtdcRspAuthenticateField))
     );
     assert_eq!(
@@ -2558,6 +2649,35 @@ fn bindgen_test_layout_CThostFtdcRspAuthenticateField() {
             stringify!(UserProductInfo)
         )
     );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspAuthenticateField>())).AppID as *const _ as usize
+        },
+        38usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspAuthenticateField),
+            "::",
+            stringify!(AppID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspAuthenticateField>())).AppType as *const _ as usize
+        },
+        71usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspAuthenticateField),
+            "::",
+            stringify!(AppType)
+        )
+    );
+}
+impl Default for CThostFtdcRspAuthenticateField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
 }
 #[repr(C)]
 #[derive(Copy, Clone)]
@@ -2567,12 +2687,14 @@ pub struct CThostFtdcAuthenticationInfoField {
     pub UserProductInfo: TThostFtdcProductInfoType,
     pub AuthInfo: TThostFtdcAuthInfoType,
     pub IsResult: TThostFtdcBoolType,
+    pub AppID: TThostFtdcAppIDType,
+    pub AppType: TThostFtdcAppTypeType,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcAuthenticationInfoField() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcAuthenticationInfoField>(),
-        172usize,
+        208usize,
         concat!("Size of: ", stringify!(CThostFtdcAuthenticationInfoField))
     );
     assert_eq!(
@@ -2646,6 +2768,31 @@ fn bindgen_test_layout_CThostFtdcAuthenticationInfoField() {
             stringify!(CThostFtdcAuthenticationInfoField),
             "::",
             stringify!(IsResult)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcAuthenticationInfoField>())).AppID as *const _ as usize
+        },
+        172usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcAuthenticationInfoField),
+            "::",
+            stringify!(AppID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcAuthenticationInfoField>())).AppType as *const _
+                as usize
+        },
+        205usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcAuthenticationInfoField),
+            "::",
+            stringify!(AppType)
         )
     );
 }
@@ -6202,12 +6349,13 @@ pub struct CThostFtdcInvestorPositionField {
     pub ExchangeID: TThostFtdcExchangeIDType,
     pub YdStrikeFrozen: TThostFtdcVolumeType,
     pub InvestUnitID: TThostFtdcInvestUnitIDType,
+    pub PositionCostOffset: TThostFtdcMoneyType,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcInvestorPositionField() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcInvestorPositionField>(),
-        360usize,
+        368usize,
         concat!("Size of: ", stringify!(CThostFtdcInvestorPositionField))
     );
     assert_eq!(
@@ -6810,6 +6958,19 @@ fn bindgen_test_layout_CThostFtdcInvestorPositionField() {
             stringify!(CThostFtdcInvestorPositionField),
             "::",
             stringify!(InvestUnitID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcInvestorPositionField>())).PositionCostOffset
+                as *const _ as usize
+        },
+        360usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcInvestorPositionField),
+            "::",
+            stringify!(PositionCostOffset)
         )
     );
 }
@@ -15462,12 +15623,13 @@ pub struct CThostFtdcSyncingInvestorPositionField {
     pub ExchangeID: TThostFtdcExchangeIDType,
     pub YdStrikeFrozen: TThostFtdcVolumeType,
     pub InvestUnitID: TThostFtdcInvestUnitIDType,
+    pub PositionCostOffset: TThostFtdcMoneyType,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcSyncingInvestorPositionField() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcSyncingInvestorPositionField>(),
-        360usize,
+        368usize,
         concat!(
             "Size of: ",
             stringify!(CThostFtdcSyncingInvestorPositionField)
@@ -16077,6 +16239,19 @@ fn bindgen_test_layout_CThostFtdcSyncingInvestorPositionField() {
             stringify!(CThostFtdcSyncingInvestorPositionField),
             "::",
             stringify!(InvestUnitID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSyncingInvestorPositionField>())).PositionCostOffset
+                as *const _ as usize
+        },
+        360usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSyncingInvestorPositionField),
+            "::",
+            stringify!(PositionCostOffset)
         )
     );
 }
@@ -22023,12 +22198,14 @@ pub struct CThostFtdcExchangeExecOrderActionField {
     pub BranchID: TThostFtdcBranchIDType,
     pub IPAddress: TThostFtdcIPAddressType,
     pub MacAddress: TThostFtdcMacAddressType,
+    pub ExchangeInstID: TThostFtdcExchangeInstIDType,
+    pub Volume: TThostFtdcVolumeType,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcExchangeExecOrderActionField() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcExchangeExecOrderActionField>(),
-        212usize,
+        244usize,
         concat!(
             "Size of: ",
             stringify!(CThostFtdcExchangeExecOrderActionField)
@@ -22274,6 +22451,32 @@ fn bindgen_test_layout_CThostFtdcExchangeExecOrderActionField() {
             stringify!(CThostFtdcExchangeExecOrderActionField),
             "::",
             stringify!(MacAddress)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcExchangeExecOrderActionField>())).ExchangeInstID
+                as *const _ as usize
+        },
+        209usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcExchangeExecOrderActionField),
+            "::",
+            stringify!(ExchangeInstID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcExchangeExecOrderActionField>())).Volume as *const _
+                as usize
+        },
+        240usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcExchangeExecOrderActionField),
+            "::",
+            stringify!(Volume)
         )
     );
 }
@@ -32439,12 +32642,14 @@ pub struct CThostFtdcExchangeOptionSelfCloseActionField {
     pub BranchID: TThostFtdcBranchIDType,
     pub IPAddress: TThostFtdcIPAddressType,
     pub MacAddress: TThostFtdcMacAddressType,
+    pub ExchangeInstID: TThostFtdcExchangeInstIDType,
+    pub OptSelfCloseFlag: TThostFtdcOptSelfCloseFlagType,
 }
 #[test]
 fn bindgen_test_layout_CThostFtdcExchangeOptionSelfCloseActionField() {
     assert_eq!(
         ::std::mem::size_of::<CThostFtdcExchangeOptionSelfCloseActionField>(),
-        208usize,
+        240usize,
         concat!(
             "Size of: ",
             stringify!(CThostFtdcExchangeOptionSelfCloseActionField)
@@ -32677,6 +32882,32 @@ fn bindgen_test_layout_CThostFtdcExchangeOptionSelfCloseActionField() {
             stringify!(CThostFtdcExchangeOptionSelfCloseActionField),
             "::",
             stringify!(MacAddress)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcExchangeOptionSelfCloseActionField>())).ExchangeInstID
+                as *const _ as usize
+        },
+        208usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcExchangeOptionSelfCloseActionField),
+            "::",
+            stringify!(ExchangeInstID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcExchangeOptionSelfCloseActionField>()))
+                .OptSelfCloseFlag as *const _ as usize
+        },
+        239usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcExchangeOptionSelfCloseActionField),
+            "::",
+            stringify!(OptSelfCloseFlag)
         )
     );
 }
@@ -33061,6 +33292,177 @@ fn bindgen_test_layout_CThostFtdcQryInvestUnitField() {
             stringify!(InvestUnitID)
         )
     );
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcSecAgentCheckModeField {
+    pub InvestorID: TThostFtdcInvestorIDType,
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub CurrencyID: TThostFtdcCurrencyIDType,
+    pub BrokerSecAgentID: TThostFtdcAccountIDType,
+    pub CheckSelfAccount: TThostFtdcBoolType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcSecAgentCheckModeField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcSecAgentCheckModeField>(),
+        48usize,
+        concat!("Size of: ", stringify!(CThostFtdcSecAgentCheckModeField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcSecAgentCheckModeField>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcSecAgentCheckModeField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentCheckModeField>())).InvestorID as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentCheckModeField),
+            "::",
+            stringify!(InvestorID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentCheckModeField>())).BrokerID as *const _
+                as usize
+        },
+        13usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentCheckModeField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentCheckModeField>())).CurrencyID as *const _
+                as usize
+        },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentCheckModeField),
+            "::",
+            stringify!(CurrencyID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentCheckModeField>())).BrokerSecAgentID
+                as *const _ as usize
+        },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentCheckModeField),
+            "::",
+            stringify!(BrokerSecAgentID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentCheckModeField>())).CheckSelfAccount
+                as *const _ as usize
+        },
+        44usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentCheckModeField),
+            "::",
+            stringify!(CheckSelfAccount)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CThostFtdcSecAgentTradeInfoField {
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub BrokerSecAgentID: TThostFtdcAccountIDType,
+    pub InvestorID: TThostFtdcInvestorIDType,
+    pub LongCustomerName: TThostFtdcLongIndividualNameType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcSecAgentTradeInfoField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcSecAgentTradeInfoField>(),
+        198usize,
+        concat!("Size of: ", stringify!(CThostFtdcSecAgentTradeInfoField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcSecAgentTradeInfoField>(),
+        1usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcSecAgentTradeInfoField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentTradeInfoField>())).BrokerID as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentTradeInfoField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentTradeInfoField>())).BrokerSecAgentID
+                as *const _ as usize
+        },
+        11usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentTradeInfoField),
+            "::",
+            stringify!(BrokerSecAgentID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentTradeInfoField>())).InvestorID as *const _
+                as usize
+        },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentTradeInfoField),
+            "::",
+            stringify!(InvestorID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcSecAgentTradeInfoField>())).LongCustomerName
+                as *const _ as usize
+        },
+        37usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcSecAgentTradeInfoField),
+            "::",
+            stringify!(LongCustomerName)
+        )
+    );
+}
+impl Default for CThostFtdcSecAgentTradeInfoField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
 }
 #[repr(C)]
 #[derive(Default, Copy, Clone)]
@@ -34844,6 +35246,7 @@ pub struct CThostFtdcInvestorPositionDetailField {
     pub SettlementPrice: TThostFtdcPriceType,
     pub CloseVolume: TThostFtdcVolumeType,
     pub CloseAmount: TThostFtdcMoneyType,
+    pub TimeFirstVolume: TThostFtdcVolumeType,
     pub InvestUnitID: TThostFtdcInvestUnitIDType,
 }
 #[test]
@@ -35204,10 +35607,23 @@ fn bindgen_test_layout_CThostFtdcInvestorPositionDetailField() {
     );
     assert_eq!(
         unsafe {
-            &(*(::std::ptr::null::<CThostFtdcInvestorPositionDetailField>())).InvestUnitID
+            &(*(::std::ptr::null::<CThostFtdcInvestorPositionDetailField>())).TimeFirstVolume
                 as *const _ as usize
         },
         264usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcInvestorPositionDetailField),
+            "::",
+            stringify!(TimeFirstVolume)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcInvestorPositionDetailField>())).InvestUnitID
+                as *const _ as usize
+        },
+        268usize,
         concat!(
             "Offset of field: ",
             stringify!(CThostFtdcInvestorPositionDetailField),
@@ -59775,6 +60191,1386 @@ fn bindgen_test_layout_CThostFtdcCurrDRIdentityField() {
             stringify!(CThostFtdcCurrDRIdentityField),
             "::",
             stringify!(DRIdentityID)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcQrySecAgentCheckModeField {
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub InvestorID: TThostFtdcInvestorIDType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcQrySecAgentCheckModeField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcQrySecAgentCheckModeField>(),
+        24usize,
+        concat!("Size of: ", stringify!(CThostFtdcQrySecAgentCheckModeField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcQrySecAgentCheckModeField>(),
+        1usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcQrySecAgentCheckModeField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcQrySecAgentCheckModeField>())).BrokerID as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcQrySecAgentCheckModeField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcQrySecAgentCheckModeField>())).InvestorID as *const _
+                as usize
+        },
+        11usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcQrySecAgentCheckModeField),
+            "::",
+            stringify!(InvestorID)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcQrySecAgentTradeInfoField {
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub BrokerSecAgentID: TThostFtdcAccountIDType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcQrySecAgentTradeInfoField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcQrySecAgentTradeInfoField>(),
+        24usize,
+        concat!("Size of: ", stringify!(CThostFtdcQrySecAgentTradeInfoField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcQrySecAgentTradeInfoField>(),
+        1usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcQrySecAgentTradeInfoField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcQrySecAgentTradeInfoField>())).BrokerID as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcQrySecAgentTradeInfoField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcQrySecAgentTradeInfoField>())).BrokerSecAgentID
+                as *const _ as usize
+        },
+        11usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcQrySecAgentTradeInfoField),
+            "::",
+            stringify!(BrokerSecAgentID)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CThostFtdcUserSystemInfoField {
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+    pub ClientSystemInfoLen: TThostFtdcSystemInfoLenType,
+    pub ClientSystemInfo: TThostFtdcClientSystemInfoType,
+    pub ClientPublicIP: TThostFtdcIPAddressType,
+    pub ClientIPPort: TThostFtdcIPPortType,
+    pub ClientLoginTime: TThostFtdcTimeType,
+    pub ClientAppID: TThostFtdcAppIDType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcUserSystemInfoField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcUserSystemInfoField>(),
+        372usize,
+        concat!("Size of: ", stringify!(CThostFtdcUserSystemInfoField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcUserSystemInfoField>(),
+        4usize,
+        concat!("Alignment of ", stringify!(CThostFtdcUserSystemInfoField))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcUserSystemInfoField>())).BrokerID as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcUserSystemInfoField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcUserSystemInfoField>())).UserID as *const _ as usize
+        },
+        11usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcUserSystemInfoField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcUserSystemInfoField>())).ClientSystemInfoLen
+                as *const _ as usize
+        },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcUserSystemInfoField),
+            "::",
+            stringify!(ClientSystemInfoLen)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcUserSystemInfoField>())).ClientSystemInfo as *const _
+                as usize
+        },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcUserSystemInfoField),
+            "::",
+            stringify!(ClientSystemInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcUserSystemInfoField>())).ClientPublicIP as *const _
+                as usize
+        },
+        305usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcUserSystemInfoField),
+            "::",
+            stringify!(ClientPublicIP)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcUserSystemInfoField>())).ClientIPPort as *const _
+                as usize
+        },
+        324usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcUserSystemInfoField),
+            "::",
+            stringify!(ClientIPPort)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcUserSystemInfoField>())).ClientLoginTime as *const _
+                as usize
+        },
+        328usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcUserSystemInfoField),
+            "::",
+            stringify!(ClientLoginTime)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcUserSystemInfoField>())).ClientAppID as *const _
+                as usize
+        },
+        337usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcUserSystemInfoField),
+            "::",
+            stringify!(ClientAppID)
+        )
+    );
+}
+impl Default for CThostFtdcUserSystemInfoField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcReqUserAuthMethodField {
+    pub TradingDay: TThostFtdcDateType,
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcReqUserAuthMethodField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcReqUserAuthMethodField>(),
+        36usize,
+        concat!("Size of: ", stringify!(CThostFtdcReqUserAuthMethodField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcReqUserAuthMethodField>(),
+        1usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcReqUserAuthMethodField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserAuthMethodField>())).TradingDay as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserAuthMethodField),
+            "::",
+            stringify!(TradingDay)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserAuthMethodField>())).BrokerID as *const _
+                as usize
+        },
+        9usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserAuthMethodField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserAuthMethodField>())).UserID as *const _ as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserAuthMethodField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcRspUserAuthMethodField {
+    pub UsableAuthMethod: TThostFtdcCurrentAuthMethodType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcRspUserAuthMethodField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcRspUserAuthMethodField>(),
+        4usize,
+        concat!("Size of: ", stringify!(CThostFtdcRspUserAuthMethodField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcRspUserAuthMethodField>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcRspUserAuthMethodField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspUserAuthMethodField>())).UsableAuthMethod
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspUserAuthMethodField),
+            "::",
+            stringify!(UsableAuthMethod)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcReqGenUserCaptchaField {
+    pub TradingDay: TThostFtdcDateType,
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcReqGenUserCaptchaField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcReqGenUserCaptchaField>(),
+        36usize,
+        concat!("Size of: ", stringify!(CThostFtdcReqGenUserCaptchaField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcReqGenUserCaptchaField>(),
+        1usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcReqGenUserCaptchaField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqGenUserCaptchaField>())).TradingDay as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqGenUserCaptchaField),
+            "::",
+            stringify!(TradingDay)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqGenUserCaptchaField>())).BrokerID as *const _
+                as usize
+        },
+        9usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqGenUserCaptchaField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqGenUserCaptchaField>())).UserID as *const _ as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqGenUserCaptchaField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CThostFtdcRspGenUserCaptchaField {
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+    pub CaptchaInfoLen: TThostFtdcCaptchaInfoLenType,
+    pub CaptchaInfo: TThostFtdcCaptchaInfoType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcRspGenUserCaptchaField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcRspGenUserCaptchaField>(),
+        2596usize,
+        concat!("Size of: ", stringify!(CThostFtdcRspGenUserCaptchaField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcRspGenUserCaptchaField>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcRspGenUserCaptchaField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspGenUserCaptchaField>())).BrokerID as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspGenUserCaptchaField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspGenUserCaptchaField>())).UserID as *const _ as usize
+        },
+        11usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspGenUserCaptchaField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspGenUserCaptchaField>())).CaptchaInfoLen as *const _
+                as usize
+        },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspGenUserCaptchaField),
+            "::",
+            stringify!(CaptchaInfoLen)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspGenUserCaptchaField>())).CaptchaInfo as *const _
+                as usize
+        },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspGenUserCaptchaField),
+            "::",
+            stringify!(CaptchaInfo)
+        )
+    );
+}
+impl Default for CThostFtdcRspGenUserCaptchaField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcReqGenUserTextField {
+    pub TradingDay: TThostFtdcDateType,
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcReqGenUserTextField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcReqGenUserTextField>(),
+        36usize,
+        concat!("Size of: ", stringify!(CThostFtdcReqGenUserTextField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcReqGenUserTextField>(),
+        1usize,
+        concat!("Alignment of ", stringify!(CThostFtdcReqGenUserTextField))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqGenUserTextField>())).TradingDay as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqGenUserTextField),
+            "::",
+            stringify!(TradingDay)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqGenUserTextField>())).BrokerID as *const _ as usize
+        },
+        9usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqGenUserTextField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqGenUserTextField>())).UserID as *const _ as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqGenUserTextField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcRspGenUserTextField {
+    pub UserTextSeq: TThostFtdcUserTextSeqType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcRspGenUserTextField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcRspGenUserTextField>(),
+        4usize,
+        concat!("Size of: ", stringify!(CThostFtdcRspGenUserTextField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcRspGenUserTextField>(),
+        4usize,
+        concat!("Alignment of ", stringify!(CThostFtdcRspGenUserTextField))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspGenUserTextField>())).UserTextSeq as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspGenUserTextField),
+            "::",
+            stringify!(UserTextSeq)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CThostFtdcReqUserLoginWithCaptchaField {
+    pub TradingDay: TThostFtdcDateType,
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+    pub Password: TThostFtdcPasswordType,
+    pub UserProductInfo: TThostFtdcProductInfoType,
+    pub InterfaceProductInfo: TThostFtdcProductInfoType,
+    pub ProtocolInfo: TThostFtdcProtocolInfoType,
+    pub MacAddress: TThostFtdcMacAddressType,
+    pub ClientIPAddress: TThostFtdcIPAddressType,
+    pub LoginRemark: TThostFtdcLoginRemarkType,
+    pub Captcha: TThostFtdcPasswordType,
+    pub ClientIPPort: TThostFtdcIPPortType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcReqUserLoginWithCaptchaField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcReqUserLoginWithCaptchaField>(),
+        228usize,
+        concat!(
+            "Size of: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField)
+        )
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcReqUserLoginWithCaptchaField>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).TradingDay
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(TradingDay)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).BrokerID as *const _
+                as usize
+        },
+        9usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).UserID as *const _
+                as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).Password as *const _
+                as usize
+        },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(Password)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).UserProductInfo
+                as *const _ as usize
+        },
+        77usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(UserProductInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).InterfaceProductInfo
+                as *const _ as usize
+        },
+        88usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(InterfaceProductInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).ProtocolInfo
+                as *const _ as usize
+        },
+        99usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(ProtocolInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).MacAddress
+                as *const _ as usize
+        },
+        110usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(MacAddress)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).ClientIPAddress
+                as *const _ as usize
+        },
+        131usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(ClientIPAddress)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).LoginRemark
+                as *const _ as usize
+        },
+        147usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(LoginRemark)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).Captcha as *const _
+                as usize
+        },
+        183usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(Captcha)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithCaptchaField>())).ClientIPPort
+                as *const _ as usize
+        },
+        224usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithCaptchaField),
+            "::",
+            stringify!(ClientIPPort)
+        )
+    );
+}
+impl Default for CThostFtdcReqUserLoginWithCaptchaField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CThostFtdcReqUserLoginWithTextField {
+    pub TradingDay: TThostFtdcDateType,
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+    pub Password: TThostFtdcPasswordType,
+    pub UserProductInfo: TThostFtdcProductInfoType,
+    pub InterfaceProductInfo: TThostFtdcProductInfoType,
+    pub ProtocolInfo: TThostFtdcProtocolInfoType,
+    pub MacAddress: TThostFtdcMacAddressType,
+    pub ClientIPAddress: TThostFtdcIPAddressType,
+    pub LoginRemark: TThostFtdcLoginRemarkType,
+    pub Text: TThostFtdcPasswordType,
+    pub ClientIPPort: TThostFtdcIPPortType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcReqUserLoginWithTextField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcReqUserLoginWithTextField>(),
+        228usize,
+        concat!("Size of: ", stringify!(CThostFtdcReqUserLoginWithTextField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcReqUserLoginWithTextField>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcReqUserLoginWithTextField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).TradingDay as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(TradingDay)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).BrokerID as *const _
+                as usize
+        },
+        9usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).UserID as *const _
+                as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).Password as *const _
+                as usize
+        },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(Password)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).UserProductInfo
+                as *const _ as usize
+        },
+        77usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(UserProductInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).InterfaceProductInfo
+                as *const _ as usize
+        },
+        88usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(InterfaceProductInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).ProtocolInfo as *const _
+                as usize
+        },
+        99usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(ProtocolInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).MacAddress as *const _
+                as usize
+        },
+        110usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(MacAddress)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).ClientIPAddress
+                as *const _ as usize
+        },
+        131usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(ClientIPAddress)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).LoginRemark as *const _
+                as usize
+        },
+        147usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(LoginRemark)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).Text as *const _
+                as usize
+        },
+        183usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(Text)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithTextField>())).ClientIPPort as *const _
+                as usize
+        },
+        224usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithTextField),
+            "::",
+            stringify!(ClientIPPort)
+        )
+    );
+}
+impl Default for CThostFtdcReqUserLoginWithTextField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CThostFtdcReqUserLoginWithOTPField {
+    pub TradingDay: TThostFtdcDateType,
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+    pub Password: TThostFtdcPasswordType,
+    pub UserProductInfo: TThostFtdcProductInfoType,
+    pub InterfaceProductInfo: TThostFtdcProductInfoType,
+    pub ProtocolInfo: TThostFtdcProtocolInfoType,
+    pub MacAddress: TThostFtdcMacAddressType,
+    pub ClientIPAddress: TThostFtdcIPAddressType,
+    pub LoginRemark: TThostFtdcLoginRemarkType,
+    pub OTPPassword: TThostFtdcPasswordType,
+    pub ClientIPPort: TThostFtdcIPPortType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcReqUserLoginWithOTPField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcReqUserLoginWithOTPField>(),
+        228usize,
+        concat!("Size of: ", stringify!(CThostFtdcReqUserLoginWithOTPField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcReqUserLoginWithOTPField>(),
+        4usize,
+        concat!(
+            "Alignment of ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).TradingDay as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(TradingDay)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).BrokerID as *const _
+                as usize
+        },
+        9usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).UserID as *const _
+                as usize
+        },
+        20usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).Password as *const _
+                as usize
+        },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(Password)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).UserProductInfo
+                as *const _ as usize
+        },
+        77usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(UserProductInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).InterfaceProductInfo
+                as *const _ as usize
+        },
+        88usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(InterfaceProductInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).ProtocolInfo as *const _
+                as usize
+        },
+        99usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(ProtocolInfo)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).MacAddress as *const _
+                as usize
+        },
+        110usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(MacAddress)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).ClientIPAddress
+                as *const _ as usize
+        },
+        131usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(ClientIPAddress)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).LoginRemark as *const _
+                as usize
+        },
+        147usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(LoginRemark)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).OTPPassword as *const _
+                as usize
+        },
+        183usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(OTPPassword)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqUserLoginWithOTPField>())).ClientIPPort as *const _
+                as usize
+        },
+        224usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqUserLoginWithOTPField),
+            "::",
+            stringify!(ClientIPPort)
+        )
+    );
+}
+impl Default for CThostFtdcReqUserLoginWithOTPField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcReqApiHandshakeField {
+    pub CryptoKeyVersion: TThostFtdcCryptoKeyVersionType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcReqApiHandshakeField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcReqApiHandshakeField>(),
+        31usize,
+        concat!("Size of: ", stringify!(CThostFtdcReqApiHandshakeField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcReqApiHandshakeField>(),
+        1usize,
+        concat!("Alignment of ", stringify!(CThostFtdcReqApiHandshakeField))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqApiHandshakeField>())).CryptoKeyVersion as *const _
+                as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqApiHandshakeField),
+            "::",
+            stringify!(CryptoKeyVersion)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CThostFtdcRspApiHandshakeField {
+    pub FrontHandshakeDataLen: TThostFtdcHandshakeDataLenType,
+    pub FrontHandshakeData: TThostFtdcHandshakeDataType,
+    pub IsApiAuthEnabled: TThostFtdcBoolType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcRspApiHandshakeField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcRspApiHandshakeField>(),
+        312usize,
+        concat!("Size of: ", stringify!(CThostFtdcRspApiHandshakeField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcRspApiHandshakeField>(),
+        4usize,
+        concat!("Alignment of ", stringify!(CThostFtdcRspApiHandshakeField))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspApiHandshakeField>())).FrontHandshakeDataLen
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspApiHandshakeField),
+            "::",
+            stringify!(FrontHandshakeDataLen)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspApiHandshakeField>())).FrontHandshakeData
+                as *const _ as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspApiHandshakeField),
+            "::",
+            stringify!(FrontHandshakeData)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcRspApiHandshakeField>())).IsApiAuthEnabled as *const _
+                as usize
+        },
+        308usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcRspApiHandshakeField),
+            "::",
+            stringify!(IsApiAuthEnabled)
+        )
+    );
+}
+impl Default for CThostFtdcRspApiHandshakeField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CThostFtdcReqVerifyApiKeyField {
+    pub ApiHandshakeDataLen: TThostFtdcHandshakeDataLenType,
+    pub ApiHandshakeData: TThostFtdcHandshakeDataType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcReqVerifyApiKeyField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcReqVerifyApiKeyField>(),
+        308usize,
+        concat!("Size of: ", stringify!(CThostFtdcReqVerifyApiKeyField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcReqVerifyApiKeyField>(),
+        4usize,
+        concat!("Alignment of ", stringify!(CThostFtdcReqVerifyApiKeyField))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqVerifyApiKeyField>())).ApiHandshakeDataLen
+                as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqVerifyApiKeyField),
+            "::",
+            stringify!(ApiHandshakeDataLen)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcReqVerifyApiKeyField>())).ApiHandshakeData as *const _
+                as usize
+        },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcReqVerifyApiKeyField),
+            "::",
+            stringify!(ApiHandshakeData)
+        )
+    );
+}
+impl Default for CThostFtdcReqVerifyApiKeyField {
+    fn default() -> Self {
+        unsafe { ::std::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcDepartmentUserField {
+    pub BrokerID: TThostFtdcBrokerIDType,
+    pub UserID: TThostFtdcUserIDType,
+    pub InvestorRange: TThostFtdcDepartmentRangeType,
+    pub InvestorID: TThostFtdcInvestorIDType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcDepartmentUserField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcDepartmentUserField>(),
+        41usize,
+        concat!("Size of: ", stringify!(CThostFtdcDepartmentUserField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcDepartmentUserField>(),
+        1usize,
+        concat!("Alignment of ", stringify!(CThostFtdcDepartmentUserField))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcDepartmentUserField>())).BrokerID as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcDepartmentUserField),
+            "::",
+            stringify!(BrokerID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcDepartmentUserField>())).UserID as *const _ as usize
+        },
+        11usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcDepartmentUserField),
+            "::",
+            stringify!(UserID)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcDepartmentUserField>())).InvestorRange as *const _
+                as usize
+        },
+        27usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcDepartmentUserField),
+            "::",
+            stringify!(InvestorRange)
+        )
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcDepartmentUserField>())).InvestorID as *const _
+                as usize
+        },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcDepartmentUserField),
+            "::",
+            stringify!(InvestorID)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Default, Copy, Clone)]
+pub struct CThostFtdcQueryFreqField {
+    pub QueryFreq: TThostFtdcQueryFreqType,
+}
+#[test]
+fn bindgen_test_layout_CThostFtdcQueryFreqField() {
+    assert_eq!(
+        ::std::mem::size_of::<CThostFtdcQueryFreqField>(),
+        4usize,
+        concat!("Size of: ", stringify!(CThostFtdcQueryFreqField))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<CThostFtdcQueryFreqField>(),
+        4usize,
+        concat!("Alignment of ", stringify!(CThostFtdcQueryFreqField))
+    );
+    assert_eq!(
+        unsafe {
+            &(*(::std::ptr::null::<CThostFtdcQueryFreqField>())).QueryFreq as *const _ as usize
+        },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(CThostFtdcQueryFreqField),
+            "::",
+            stringify!(QueryFreq)
         )
     );
 }

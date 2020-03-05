@@ -1,0 +1,17 @@
+[package]
+name = "ctp-trader"
+version = "0.8.0"
+authors = ["caleb.xiang <caleb.xiang@gmail.com>"]
+edition = "2018"
+links = "ctp-trader"
+
+[features]
+channel = ["crossbeam-channel"]
+
+[dependencies]
+crossbeam-channel = { version = "0.4.0", optional = true }
+simple-error = "0.2"
+
+[dependencies.ctp-common]
+version = "0.8.0"
+path = "../ctp-common"

@@ -13,6 +13,16 @@ pub const THOST_FTDC_COMB_FLAG_LENGTH: usize = 5;
 use std::fmt;
 use super::{ gb18030_cstr_to_str, normalize_double, reduce_comb_flags, maybe_char };
 
+impl fmt::Debug for CThostFtdcReqAuthenticateField {
+    fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+        fmt.debug_struct("CThostFtdcReqAuthenticateField")
+            .field("BrokerID", &gb18030_cstr_to_str(&self.BrokerID))
+            .field("UserID", &gb18030_cstr_to_str(&self.UserID))
+            .field("UserProductInfo", &gb18030_cstr_to_str(&self.UserProductInfo))
+            .finish()
+    }
+}
+
 impl fmt::Debug for CThostFtdcRspAuthenticateField {
     fn fmt(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
         fmt.debug_struct("CThostFtdcRspAuthenticateField")

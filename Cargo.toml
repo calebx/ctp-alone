@@ -1,2 +1,2 @@
 [workspace]
-members = ["ctp-common", "ctp-md"]
+members = ["ctp-common", "ctp-md", "ctp-trader"]

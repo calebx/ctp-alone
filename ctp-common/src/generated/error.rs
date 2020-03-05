@@ -92,6 +92,7 @@ pub const ERROR_NEED_RETRY: TThostFtdcErrorIDType = 90;
 pub const ERROR_EXCHANGE_RTNERROR: TThostFtdcErrorIDType = 91;
 pub const ERROR_QUOTE_DERIVEDORDER_ACTIONERROR: TThostFtdcErrorIDType = 92;
 pub const ERROR_INSTRUMENTMAP_NOT_FOUND: TThostFtdcErrorIDType = 93;
+pub const ERROR_CANCELLATION_OF_OTC_DERIVED_ORDER_NOT_ALLOWED: TThostFtdcErrorIDType = 94;
 pub const ERROR_NO_TRADING_RIGHT_IN_SEPC_DR: TThostFtdcErrorIDType = 101;
 pub const ERROR_NO_DR_NO: TThostFtdcErrorIDType = 102;
 pub const ERROR_BATCHACTION_NOSUPPORT: TThostFtdcErrorIDType = 103;
@@ -149,6 +150,7 @@ pub const ERROR_SECAGENT_QUERY_BY_CCB: TThostFtdcErrorIDType = 1039;
 pub const ERROR_BANKACCOUNT_NOT_EMPTY: TThostFtdcErrorIDType = 1040;
 pub const ERROR_INVALID_RESERVE_OPEN_ACCOUNT: TThostFtdcErrorIDType = 1041;
 pub const ERROR_OPEN_ACCOUNT_NOT_DEFAULT_ACCOUNT: TThostFtdcErrorIDType = 1042;
+pub const ERROR_BANK_SYSTEM_INTERNAL_ERROR: TThostFtdcErrorIDType = 1043;
 pub const ERROR_NO_VALID_BANKOFFER_AVAILABLE: TThostFtdcErrorIDType = 2000;
 pub const ERROR_PASSWORD_MISMATCH: TThostFtdcErrorIDType = 2001;
 pub const ERROR_DUPLATION_BANK_SERIAL: TThostFtdcErrorIDType = 2004;
@@ -185,6 +187,15 @@ pub const ERROR_FBE_CURRENCYID_NOT_SUPPORTED: TThostFtdcErrorIDType = 3035;
 pub const ERROR_FBE_WRONG_BANK_ACCOUNT: TThostFtdcErrorIDType = 3036;
 pub const ERROR_FBE_BANK_ACCOUNT_NO_FUNDS: TThostFtdcErrorIDType = 3037;
 pub const ERROR_FBE_DUP_CERT_NO: TThostFtdcErrorIDType = 3038;
+pub const ERROR_API_UNSUPPORTED_VERSION: TThostFtdcErrorIDType = 3039;
+pub const ERROR_API_INVALID_KEY: TThostFtdcErrorIDType = 3040;
+pub const ERROR_OPTION_SELF_CLOSE_NOT_OPTION: TThostFtdcErrorIDType = 3041;
+pub const ERROR_OPTION_SELF_CLOSE_DUPLICATE_REF: TThostFtdcErrorIDType = 3042;
+pub const ERROR_OPTION_SELF_CLOSE_BAD_FIELD: TThostFtdcErrorIDType = 3043;
+pub const ERROR_OPTION_SELF_CLOSE_REC_NOT_FOUND: TThostFtdcErrorIDType = 3044;
+pub const ERROR_OPTION_SELF_CLOSE_STATUS_ERR: TThostFtdcErrorIDType = 3045;
+pub const ERROR_OPTION_SELF_CLOSE_DOUBLE_SET_ERR: TThostFtdcErrorIDType = 3046;
+pub const ERROR_QUOTE_WRONG_HEDGE_TYPE: TThostFtdcErrorIDType = 3047;
 pub fn error_id_to_chinese_description(error_id: TThostFtdcErrorIDType) -> &'static str {
     match error_id {
         ERROR_NONE => "CTP:正确",
@@ -242,7 +253,7 @@ pub fn error_id_to_chinese_description(error_id: TThostFtdcErrorIDType) -> &'sta
         ERROR_BROKER_NOT_ENOUGH_CONDORDER => "CTP:经纪公司没有足够可用的条件单数量",
         ERROR_INVESTOR_NOT_ENOUGH_CONDORDER => "CTP:投资者没有足够可用的条件单数量",
         ERROR_BROKER_NOT_SUPPORT_CONDORDER => "CTP:经纪公司不支持条件单",
-        ERROR_RESEND_ORDER_BROKERINVESTOR_NOTMATCH => "CTP:重发未知单经济公司/投资者不匹配",
+        ERROR_RESEND_ORDER_BROKERINVESTOR_NOTMATCH => "CTP:重发未知单经纪公司/投资者不匹配",
         ERROR_SYC_OTP_FAILED => "CTP:同步动态令牌失败",
         ERROR_OTP_MISMATCH => "CTP:动态令牌校验错误",
         ERROR_OTPPARAM_NOT_FOUND => "CTP:找不到动态令牌配置信息",
@@ -281,6 +292,7 @@ pub fn error_id_to_chinese_description(error_id: TThostFtdcErrorIDType) -> &'sta
         ERROR_EXCHANGE_RTNERROR => "CTP：交易所返回的错误",
         ERROR_QUOTE_DERIVEDORDER_ACTIONERROR => "CTP:报价衍生单要等待交易所返回才能撤单",
         ERROR_INSTRUMENTMAP_NOT_FOUND => "CTP:找不到组合合约映射",
+        ERROR_CANCELLATION_OF_OTC_DERIVED_ORDER_NOT_ALLOWED => "CTP:不允许撤销OTC衍生报单",
         ERROR_NO_TRADING_RIGHT_IN_SEPC_DR => "CTP:用户在本系统没有报单权限",
         ERROR_NO_DR_NO => "CTP:系统缺少灾备标示号",
         ERROR_BATCHACTION_NOSUPPORT => "CTP:该交易所不支持批量撤单",
@@ -338,6 +350,7 @@ pub fn error_id_to_chinese_description(error_id: TThostFtdcErrorIDType) -> &'sta
         ERROR_BANKACCOUNT_NOT_EMPTY => "CTP:银期转账：银行账户不能为空",
         ERROR_INVALID_RESERVE_OPEN_ACCOUNT => "CTP:银期转账：资金账户存在，预约开户失败",
         ERROR_OPEN_ACCOUNT_NOT_DEFAULT_ACCOUNT => "CTP:银期转账：开户请求的银行卡号和预留的账号不同",
+        ERROR_BANK_SYSTEM_INTERNAL_ERROR => "银行系统内部错误",
         ERROR_NO_VALID_BANKOFFER_AVAILABLE => "CTP:该报盘未连接到银行",
         ERROR_PASSWORD_MISMATCH => "CTP:资金密码错误",
         ERROR_DUPLATION_BANK_SERIAL => "CTP:银行流水号重复",
@@ -374,6 +387,15 @@ pub fn error_id_to_chinese_description(error_id: TThostFtdcErrorIDType) -> &'sta
         ERROR_FBE_WRONG_BANK_ACCOUNT => "CTP:银期换汇：银行帐号不正确",
         ERROR_FBE_BANK_ACCOUNT_NO_FUNDS => "CTP:银期换汇：银行帐户余额不足",
         ERROR_FBE_DUP_CERT_NO => "CTP:银期换汇：凭证号重复",
+        ERROR_API_UNSUPPORTED_VERSION => "CTP: 不支持该API版本",
+        ERROR_API_INVALID_KEY => "CTP: 无效的API KEY",
+        ERROR_OPTION_SELF_CLOSE_NOT_OPTION => "CTP:期权对冲,履约对冲:非期权合约",
+        ERROR_OPTION_SELF_CLOSE_DUPLICATE_REF => "CTP:期权对冲,履约对冲:请求引用不合法",
+        ERROR_OPTION_SELF_CLOSE_BAD_FIELD => "CTP:期权对冲,履约对冲:非法字段 ",
+        ERROR_OPTION_SELF_CLOSE_REC_NOT_FOUND => "CTP:期权对冲,履约对冲:撤销未找到记录",
+        ERROR_OPTION_SELF_CLOSE_STATUS_ERR => "CTP:期权对冲,履约对冲:对冲状态不对，不能撤销",
+        ERROR_OPTION_SELF_CLOSE_DOUBLE_SET_ERR => "CTP:期权对冲,履约对冲:不能重复设置，只能先撤销再设置",
+        ERROR_QUOTE_WRONG_HEDGE_TYPE => "CTP:报价不支持改投机套保类型",
         _ => "unknown error",
     }
 }

@@ -52,7 +52,7 @@ fn main() {
     let mut trader_api = TraderApi::new(flow_path);
 
     trader_api.register_spi(Box::new(Spi));
-    trader_api.register_front(std::ffi::CString::new("tcp://180.168.146.187:10100").unwrap());
+    trader_api.register_front(std::ffi::CString::new("tcp://180.168.146.187:10130").unwrap());
     trader_api.subscribe_private_topic(ResumeType::Quick);
     trader_api.subscribe_public_topic(ResumeType::Quick);
     trader_api.init();

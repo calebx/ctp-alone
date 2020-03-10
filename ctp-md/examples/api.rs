@@ -1,4 +1,3 @@
-use ctp_common::sleep;
 use ctp_md::*;
 use std::ffi::CString;
 
@@ -8,10 +7,9 @@ impl MdSpi for Spi {}
 fn new_login() -> CThostFtdcReqUserLoginField {
     let mut f: CThostFtdcReqUserLoginField = Default::default();
 
-    let broker_id = "9999";
+    let broker_id = &std::env::var("CTP_BROKER_ID").unwrap();
     let user_id = &std::env::var("CTP_USER_ID").unwrap();
     let password = &std::env::var("CTP_PASSWORD").unwrap();
-
     set_cstr_from_str_truncate(&mut f.BrokerID, broker_id);
     set_cstr_from_str_truncate(&mut f.UserID, user_id);
     set_cstr_from_str_truncate(&mut f.Password, password);
@@ -21,9 +19,8 @@ fn new_login() -> CThostFtdcReqUserLoginField {
 fn new_logout() -> CThostFtdcUserLogoutField {
     let mut f: CThostFtdcUserLogoutField = Default::default();
 
-    let broker_id = "9999";
+    let broker_id = &std::env::var("CTP_BROKER_ID").unwrap();
     let user_id = &std::env::var("CTP_USER_ID").unwrap();
-
     set_cstr_from_str_truncate(&mut f.BrokerID, broker_id);
     set_cstr_from_str_truncate(&mut f.UserID, user_id);
     f
@@ -33,7 +30,7 @@ fn main() {
     let mut request_id = 0;
     let mut md_api = MdApi::new(CString::new("").unwrap(), false, false);
     md_api.register_spi(Box::new(Spi));
-    md_api.register_front(CString::new("tcp://180.168.146.187:10130").unwrap());
+    md_api.register_front(CString::new(std::env::var("CTP_MD_URL").unwrap()).unwrap());
     md_api.init();
 
     sleep(2);

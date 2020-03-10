@@ -32,6 +32,7 @@ fn main() {
     md_api.register_spi(Box::new(Spi));
     md_api.register_front(CString::new(std::env::var("CTP_MD_URL").unwrap()).unwrap());
     md_api.init();
+    md_api.join();
 
     sleep(2);
     println!("=== try req_user_login");
@@ -61,14 +62,6 @@ fn main() {
         Err(err) => println!("subscribe_for_quote_rsp err: {:?}", err),
     };
 
-    sleep(10);
-    println!("=== try req_user_logout");
-    request_id += 1;
-    match md_api.req_user_logout(&new_logout(), request_id) {
-        Ok(()) => println!("req_user_logout ok"),
-        Err(err) => println!("req_user_logout err: {:?}", err),
-    };
-
-    sleep(1);
+    sleep(100);
     println!("=== THE END");
 }

@@ -31,11 +31,11 @@ fn new_logout() -> CThostFtdcUserLogoutField {
 
 fn main() {
     let mut current_request_id = 0;
-    let flow_path = std::ffi::CString::new("").unwrap();
+    let flow_path = CString::new("").unwrap();
     let mut md_api = MdApi::new(flow_path, false, false);
 
     md_api.register_spi(Box::new(Spi));
-    md_api.register_front(std::ffi::CString::new("tcp://180.168.146.187:10130").unwrap());
+    md_api.register_front(CString::new("tcp://180.168.146.187:10130").unwrap());
     md_api.init();
 
     sleep(2);

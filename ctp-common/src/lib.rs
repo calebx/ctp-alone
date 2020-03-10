@@ -1,8 +1,8 @@
 mod bind;
 pub use bind::*;
 
-use encoding::{ DecoderTrap, Encoding };
 use encoding::all::GB18030;
+use encoding::{DecoderTrap, Encoding};
 use simple_error::SimpleError;
 use std::borrow::Cow;
 use std::fmt;
@@ -35,19 +35,16 @@ pub fn ascii_cstr_to_str(s: &[u8]) -> Result<&str, SimpleError> {
             let len = memchr::memchr(0, s).unwrap();
             let ascii_s = &s[0..len];
             if ascii_s.is_ascii() {
-                unsafe {
-                    Ok(std::str::from_utf8_unchecked(ascii_s))
-                }
+                unsafe { Ok(std::str::from_utf8_unchecked(ascii_s)) }
             } else {
                 Err(SimpleError::new("cstr is not ascii"))
             }
-        },
-        Some(&c) => {
-            Err(SimpleError::new(format!("cstr should terminate with null instead of {:#x}", c)))
-        },
-        None => {
-            Err(SimpleError::new("cstr cannot have 0 length"))
         }
+        Some(&c) => Err(SimpleError::new(format!(
+            "cstr should terminate with null instead of {:#x}",
+            c
+        ))),
+        None => Err(SimpleError::new("cstr cannot have 0 length")),
     }
 }
 
@@ -65,7 +62,11 @@ pub fn gb18030_cstr_to_str(v: &[u8]) -> Cow<str> {
 }
 
 pub fn reduce_comb_flags(flags: &[u8]) -> String {
-    flags.iter().filter(|&&c| c != 0).map(|&c| char::from(c)).collect()
+    flags
+        .iter()
+        .filter(|&&c| c != 0)
+        .map(|&c| char::from(c))
+        .collect()
 }
 
 pub fn maybe_char(c: u8) -> Option<char> {
@@ -150,8 +151,7 @@ pub enum ApiError {
     Throttled = -3,
 }
 
-impl std::error::Error for ApiError {
-}
+impl std::error::Error for ApiError {}
 
 impl fmt::Display for ApiError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -184,8 +184,7 @@ pub struct RspError {
     pub msg: String,
 }
 
-impl std::error::Error for RspError {
-}
+impl std::error::Error for RspError {}
 
 impl fmt::Display for RspError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -206,24 +205,24 @@ pub fn from_rsp_result_to_string(rsp_result: &RspResult) -> String {
 pub fn from_rsp_info_to_rsp_result(rsp_info: *const CThostFtdcRspInfoField) -> RspResult {
     match unsafe { rsp_info.as_ref() } {
         Some(info) => match *info {
-            CThostFtdcRspInfoField { ErrorID: 0, .. } => {
-                Ok(())
-            },
-            CThostFtdcRspInfoField { ErrorID: id, ErrorMsg: ref msg } => {
-                Err(RspError{ id, msg: gb18030_cstr_to_str(msg).into_owned() })
-            }
+            CThostFtdcRspInfoField { ErrorID: 0, .. } => Ok(()),
+            CThostFtdcRspInfoField {
+                ErrorID: id,
+                ErrorMsg: ref msg,
+            } => Err(RspError {
+                id,
+                msg: gb18030_cstr_to_str(msg).into_owned(),
+            }),
         },
-        None => {
-            Ok(())
-        },
+        None => Ok(()),
     }
 }
 
 pub fn is_terminal_order_status(order_status: TThostFtdcOrderStatusType) -> bool {
-    order_status == THOST_FTDC_OST_AllTraded ||
-        order_status == THOST_FTDC_OST_PartTradedNotQueueing ||
-        order_status == THOST_FTDC_OST_NoTradeNotQueueing ||
-        order_status == THOST_FTDC_OST_Canceled
+    order_status == THOST_FTDC_OST_AllTraded
+        || order_status == THOST_FTDC_OST_PartTradedNotQueueing
+        || order_status == THOST_FTDC_OST_NoTradeNotQueueing
+        || order_status == THOST_FTDC_OST_Canceled
 }
 
 pub fn is_valid_order_sys_id(order_sys_id: &TThostFtdcOrderSysIDType) -> bool {
@@ -328,10 +327,17 @@ pub fn is_valid_order_sys_id(order_sys_id: &TThostFtdcOrderSysIDType) -> bool {
 
 pub fn set_cstr_from_str(buffer: &mut [u8], text: &str) -> Result<(), SimpleError> {
     if let Some(i) = memchr::memchr(0, text.as_bytes()) {
-        return Err(SimpleError::new(format!("null found in str at offset {} when filling cstr", i)));
+        return Err(SimpleError::new(format!(
+            "null found in str at offset {} when filling cstr",
+            i
+        )));
     }
     if text.len() + 1 > buffer.len() {
-        return Err(SimpleError::new(format!("str len {} too long when filling cstr with buffer len {}", text.len(), buffer.len())));
+        return Err(SimpleError::new(format!(
+            "str len {} too long when filling cstr with buffer len {}",
+            text.len(),
+            buffer.len()
+        )));
     }
     unsafe {
         std::ptr::copy_nonoverlapping(text.as_ptr(), buffer.as_mut_ptr(), text.len());
@@ -341,7 +347,13 @@ pub fn set_cstr_from_str(buffer: &mut [u8], text: &str) -> Result<(), SimpleErro
 }
 
 pub fn set_cstr_from_str_truncate(buffer: &mut [u8], text: &str) {
-    for (place, data) in buffer.split_last_mut().expect("buffer len 0 in set_cstr_from_str_truncate").1.iter_mut().zip(text.as_bytes().iter()) {
+    for (place, data) in buffer
+        .split_last_mut()
+        .expect("buffer len 0 in set_cstr_from_str_truncate")
+        .1
+        .iter_mut()
+        .zip(text.as_bytes().iter())
+    {
         *place = *data;
     }
     unsafe {
@@ -359,11 +371,11 @@ pub fn normalize_double(d: f64) -> Option<f64> {
 
 #[cfg(test)]
 mod tests {
-    use std::borrow::Cow;
     use super::ascii_cstr_to_str;
     use super::gb18030_cstr_to_str;
+    use std::borrow::Cow;
     // use super::to_exchange_timestamp;
-    use super::{ set_cstr_from_str, set_cstr_from_str_truncate };
+    use super::{set_cstr_from_str, set_cstr_from_str_truncate};
     // use super::CThostFtdcDepthMarketDataField;
 
     #[test]

@@ -16,23 +16,12 @@ fn new_login() -> CThostFtdcReqUserLoginField {
     f
 }
 
-fn new_logout() -> CThostFtdcUserLogoutField {
-    let mut f: CThostFtdcUserLogoutField = Default::default();
-
-    let broker_id = &std::env::var("CTP_BROKER_ID").unwrap();
-    let user_id = &std::env::var("CTP_USER_ID").unwrap();
-    set_cstr_from_str_truncate(&mut f.BrokerID, broker_id);
-    set_cstr_from_str_truncate(&mut f.UserID, user_id);
-    f
-}
-
 fn main() {
     let mut request_id = 0;
     let mut md_api = MdApi::new(CString::new("").unwrap(), false, false);
     md_api.register_spi(Box::new(Spi));
     md_api.register_front(CString::new(std::env::var("CTP_MD_URL").unwrap()).unwrap());
     md_api.init();
-    md_api.join();
 
     sleep(2);
     println!("=== try req_user_login");
@@ -45,10 +34,10 @@ fn main() {
     sleep(2);
     println!("=== try subscribe_market_data");
     let instrument_ids = vec![
-        CString::new("IF1703").unwrap(),
-        CString::new("au1712").unwrap(),
-        CString::new("m1709").unwrap(),
-        CString::new("CF709").unwrap(),
+        CString::new("cu2003").unwrap(),
+        CString::new("cu2004").unwrap(),
+        CString::new("au2006").unwrap(),
+        CString::new("au2008").unwrap(),
     ];
     match md_api.subscribe_market_data(&instrument_ids.clone()) {
         Ok(()) => println!("subscribe_market_data ok"),

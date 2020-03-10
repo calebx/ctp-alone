@@ -30,19 +30,17 @@ fn new_logout() -> CThostFtdcUserLogoutField {
 }
 
 fn main() {
-    let mut current_request_id = 0;
-    let flow_path = CString::new("").unwrap();
-    let mut md_api = MdApi::new(flow_path, false, false);
-
+    let mut request_id = 0;
+    let mut md_api = MdApi::new(CString::new("").unwrap(), false, false);
     md_api.register_spi(Box::new(Spi));
     md_api.register_front(CString::new("tcp://180.168.146.187:10130").unwrap());
     md_api.init();
 
     sleep(2);
     println!("=== try req_user_login");
-    current_request_id += 1;
-    match md_api.req_user_login(&new_login(), current_request_id) {
-        Ok(()) => println!("req_user_login ok"),
+    request_id += 1;
+    match md_api.req_user_login(&new_login(), request_id) {
+        Ok(_) => println!("req_user_login ok"),
         Err(err) => println!("req_user_login err: {:?}", err),
     };
 
@@ -66,10 +64,10 @@ fn main() {
         Err(err) => println!("subscribe_for_quote_rsp err: {:?}", err),
     };
 
-    sleep(5);
+    sleep(10);
     println!("=== try req_user_logout");
-    current_request_id += 1;
-    match md_api.req_user_logout(&new_logout(), current_request_id) {
+    request_id += 1;
+    match md_api.req_user_logout(&new_logout(), request_id) {
         Ok(()) => println!("req_user_logout ok"),
         Err(err) => println!("req_user_logout err: {:?}", err),
     };

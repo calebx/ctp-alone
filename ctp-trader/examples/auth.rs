@@ -69,12 +69,12 @@ fn main() {
         Err(err) => println!("req_user_login err: {:?}", err),
     };
 
-    current_request_id += 1;
-    match trader_api.req_user_password_update(&new_password(), current_request_id) {
-        Ok(()) => println!("req_user_password_update ok"),
-        Err(err) => println!("req_user_password_update err: {:?}", err),
-    };
+    // current_request_id += 1;
+    // match trader_api.req_user_password_update(&new_password(), current_request_id) {
+    //     Ok(()) => println!("req_user_password_update ok"),
+    //     Err(err) => println!("req_user_password_update err: {:?}", err),
+    // };
 
-    sleep(2);
+    sleep(10);
     println!("=== THE END");
 }

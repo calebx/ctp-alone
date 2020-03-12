@@ -30,6 +30,7 @@ fn new_login() -> CThostFtdcReqUserLoginField {
     f
 }
 
+#[allow(dead_code)]
 fn new_password() -> CThostFtdcUserPasswordUpdateField {
     let mut f: CThostFtdcUserPasswordUpdateField = Default::default();
 
@@ -69,11 +70,14 @@ fn main() {
         Err(err) => println!("req_user_login err: {:?}", err),
     };
 
-    // current_request_id += 1;
-    // match trader_api.req_user_password_update(&new_password(), current_request_id) {
-    //     Ok(()) => println!("req_user_password_update ok"),
-    //     Err(err) => println!("req_user_password_update err: {:?}", err),
-    // };
+    // update password by api
+    if false {
+        current_request_id += 1;
+        match trader_api.req_user_password_update(&new_password(), current_request_id) {
+            Ok(()) => println!("req_user_password_update ok"),
+            Err(err) => println!("req_user_password_update err: {:?}", err),
+        };
+    }
 
     sleep(10);
     println!("=== THE END");
